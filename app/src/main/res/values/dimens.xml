@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="money_app_bar_height">70dp</dimen>
+    <dimen name="card_number_view_height">28dp</dimen>
+
+</resources>

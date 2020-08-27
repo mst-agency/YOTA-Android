@@ -1,11 +1,31 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:statusBarColor">@color/colorPrimary</item>
+        <item name="android:windowLightStatusBar">true</item>
+
+        <item name="fontExtraBold">@font/font_extra_bold</item>
+        <item name="fontBold">@font/font_bold</item>
+        <item name="fontLight">@font/font_light</item>
+        <item name="fontNormal">@font/font_normal</item>
+        <item name="fontThin">@font/font_thin</item>
+        <item name="fontExtraLight">@font/font_extra_light</item>
+    </style>
+
+    <style name="CardNumberViewStyle">
+        <item name="android:background">@drawable/card_number_view_background</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:paddingStart">8dp</item>
+        <item name="android:paddingEnd">8dp</item>
+        <item name="android:paddingTop">4dp</item>
+        <item name="android:paddingBottom">4dp</item>
+
     </style>
 
 </resources>

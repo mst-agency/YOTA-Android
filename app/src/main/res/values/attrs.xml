@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <attr name="fontExtraBold" format="reference" />
+    <attr name="fontBold" format="reference" />
+    <attr name="fontExtraLight" format="reference" />
+    <attr name="fontLight" format="reference" />
+    <attr name="fontNormal" format="reference" />
+    <attr name="fontThin" format="reference" />
+
+    <declare-styleable name="MoneyAppBarView">
+        <attr name="expanded_height" format="dimension" />
+    </declare-styleable>
+
+</resources>
