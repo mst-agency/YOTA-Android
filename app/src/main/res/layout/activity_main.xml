@@ -18,6 +18,12 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <app.yota.view.MoneyCardView
+                android:id="@+id/money_card_view"
+                style="@style/MoneyCardViewStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1000dp" />
