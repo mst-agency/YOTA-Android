@@ -3,6 +3,7 @@
     package="app.yota">
 
     <application
+        android:name=".YotaApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -16,6 +17,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <provider
+            android:name=".YotaInitProvider"
+            android:authorities="${applicationId}.YotaInitProvider"
+            android:enabled="true"
+            android:exported="false"
+            android:initOrder="2147483647" />
     </application>
 
 </manifest>
