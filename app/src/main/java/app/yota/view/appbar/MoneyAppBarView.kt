@@ -5,6 +5,7 @@ import android.util.AttributeSet
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.core.content.ContextCompat
 import app.yota.R
 import app.yota.utils.balanceColor
 import app.yota.utils.formatBalance
@@ -27,6 +28,7 @@ class MoneyAppBarView @JvmOverloads constructor(
 
         cardNumberView = findViewById(R.id.card_number_view)
         balanceValueTextView = findViewById(R.id.balance_value_text_view)
+        cardNumberView.setBackgroundColor(ContextCompat.getColor(context, R.color.card_number_background_color_collapsed))
     }
 
     fun setBalance(value: Float) {
@@ -36,6 +38,10 @@ class MoneyAppBarView @JvmOverloads constructor(
 
     fun setCardNumber(value: Int) {
         cardNumberView.setCardNumber(value)
+    }
+
+    fun setOnCardNumberCLickListener(listener: OnClickListener) {
+        cardNumberView.setOnClickListener(listener)
     }
 
     override fun getBehavior(): CoordinatorLayout.Behavior<MoneyAppBarView> {

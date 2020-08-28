@@ -18,7 +18,6 @@
     </style>
 
     <style name="CardNumberViewStyle">
-        <item name="android:background">@drawable/card_number_view_background</item>
         <item name="android:gravity">center_vertical</item>
         <item name="android:orientation">horizontal</item>
         <item name="android:paddingStart">8dp</item>

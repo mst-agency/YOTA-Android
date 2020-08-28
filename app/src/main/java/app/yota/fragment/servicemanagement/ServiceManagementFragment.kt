@@ -52,6 +52,12 @@ class ServiceManagementFragment : BaseFragment() {
         moneyAppBarView = view.findViewById(R.id.appbar)
         moneyCardView = view.findViewById(R.id.money_card_view)
         loadingProgressBar = view.findViewById(R.id.loading_progress_bar)
+
+        val cardNumberClickListener = View.OnClickListener {
+            viewModel.onCardNumberClick()
+        }
+        moneyAppBarView.setOnCardNumberCLickListener(cardNumberClickListener)
+        moneyCardView.setOnCardNumberCLickListener(cardNumberClickListener)
     }
 
     private fun handleContentState(content: ServiceManagementViewModel.State.Content) {

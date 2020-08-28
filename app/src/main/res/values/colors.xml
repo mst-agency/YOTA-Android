@@ -4,6 +4,8 @@
     <color name="colorPrimaryDark">#00AEEF</color>
     <color name="colorAccent">@color/colorPrimaryDark</color>
     <color name="card_number_text_color">#434C5E</color>
+    <color name="card_number_background_color_collapsed">#ffffffff</color>
+    <color name="card_number_background_color_expanded">#f4f6f9</color>
     <color name="balance_color">#434C5D</color>
 
     <color name="gradient_title_start_color">#10aeee</color>

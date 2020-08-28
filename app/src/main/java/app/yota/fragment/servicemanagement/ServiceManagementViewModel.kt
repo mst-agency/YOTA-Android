@@ -4,9 +4,11 @@ import androidx.lifecycle.MutableLiveData
 import app.yota.BaseViewModel
 import app.yota.di.Schedulers
 import app.yota.domain.repository.IAccountRepository
+import app.yota.fragment.IServiceManagementScreenRouter
 import javax.inject.Inject
 
 class ServiceManagementViewModel @Inject constructor(
+    private val router: IServiceManagementScreenRouter,
     private val schedulers: Schedulers,
     private val accountRepository: IAccountRepository
 ) : BaseViewModel() {
@@ -35,6 +37,10 @@ class ServiceManagementViewModel @Inject constructor(
                     }
                 }
         }
+    }
+
+    fun onCardNumberClick() {
+        router.toCardManagement()
     }
 
     sealed class State {

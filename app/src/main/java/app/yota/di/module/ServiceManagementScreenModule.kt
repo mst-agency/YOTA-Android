@@ -1,6 +1,9 @@
 package app.yota.di.module
 
+import android.content.Context
+import android.widget.Toast
 import app.yota.di.scope.ViewModelInject
+import app.yota.fragment.IServiceManagementScreenRouter
 import app.yota.fragment.servicemanagement.ServiceManagementFragment
 import app.yota.fragment.servicemanagement.ServiceManagementViewModel
 import app.yota.utils.ViewModelFactory
@@ -19,4 +22,12 @@ class ServiceManagementScreenModule {
         provider: Provider<ServiceManagementViewModel>
     ) = fragment.getViewModel<ServiceManagementViewModel>(ViewModelFactory(provider))
 
+    @Provides
+    fun provideServiceManagementScreenRouter(context: Context): IServiceManagementScreenRouter {
+        return object : IServiceManagementScreenRouter {
+            override fun toCardManagement() {
+                Toast.makeText(context, "router to CardManagement", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
 }
