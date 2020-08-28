@@ -27,8 +27,8 @@ class MoneyAppBarView @JvmOverloads constructor(
         balanceValueTextView = findViewById(R.id.balance_value_text_view)
     }
 
-    fun setBalance(value: Float) {
-        balanceValueTextView.text = context.getString(R.string.balance_formatted, value)
+    fun setBalance(value: String) {
+        balanceValueTextView.text = value
     }
 
     fun setCardNumber(value: Int) {

@@ -41,4 +41,10 @@
         app:expanded_height="@dimen/money_app_bar_height"
         tools:layout_height="@dimen/money_app_bar_height" />
 
+    <ProgressBar
+        android:id="@+id/loading_progress_bar"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

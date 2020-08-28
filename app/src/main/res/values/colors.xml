@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">#EAEEF4</color>
     <color name="colorPrimaryDark">#00AEEF</color>
-    <color name="colorAccent">#03DAC5</color>
+    <color name="colorAccent">@color/colorPrimaryDark</color>
     <color name="card_number_text_color">#434C5E</color>
     <color name="balance_color">#434C5D</color>
 
