@@ -5,14 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.constraintlayout.widget.Group
-import androidx.core.widget.ContentLoadingProgressBar
 import androidx.lifecycle.Observer
 import app.yota.R
 import app.yota.di.scope.ViewModelInject
 import app.yota.fragment.BaseFragment
-import app.yota.utils.ICurrencyFormatter
 import app.yota.view.MoneyCardView
 import app.yota.view.appbar.MoneyAppBarView
 import app.yota.view.showIfOrInvisible
@@ -59,8 +55,8 @@ class ServiceManagementFragment : BaseFragment() {
     }
 
     private fun handleContentState(content: ServiceManagementViewModel.State.Content) {
-        moneyAppBarView.setBalance(content.moneyFormatted)
-        moneyCardView.setBalance(content.moneyFormatted)
+        moneyAppBarView.setBalance(content.money)
+        moneyCardView.setBalance(content.money)
 
         moneyCardView.setCardNumber(content.cardLastNumber)
         moneyAppBarView.setCardNumber(content.cardLastNumber)

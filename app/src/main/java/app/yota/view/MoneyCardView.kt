@@ -5,6 +5,8 @@ import android.util.AttributeSet
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import app.yota.R
+import app.yota.utils.balanceColor
+import app.yota.utils.formatBalance
 
 class MoneyCardView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
@@ -20,8 +22,9 @@ class MoneyCardView @JvmOverloads constructor(
         balanceValueTextView = findViewById(R.id.balance_value_text_view)
     }
 
-    fun setBalance(value: String) {
-        balanceValueTextView.text = value
+    fun setBalance(value: Float) {
+        balanceValueTextView.text = value.formatBalance()
+        balanceValueTextView.setTextColor(value.balanceColor(context))
     }
 
     fun setCardNumber(value: Int) {

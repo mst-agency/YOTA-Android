@@ -4,11 +4,9 @@ import androidx.lifecycle.MutableLiveData
 import app.yota.BaseViewModel
 import app.yota.di.Schedulers
 import app.yota.domain.repository.IAccountRepository
-import app.yota.utils.ICurrencyFormatter
 import javax.inject.Inject
 
 class ServiceManagementViewModel @Inject constructor(
-    private val currencyFormatter: ICurrencyFormatter,
     private val schedulers: Schedulers,
     private val accountRepository: IAccountRepository
 ) : BaseViewModel() {
@@ -31,7 +29,7 @@ class ServiceManagementViewModel @Inject constructor(
                         _stateLiveData.postValue(
                             State.Content(
                                 data.cardNumber.takeLast(4).toInt(),
-                                currencyFormatter.format(data.money)
+                                data.money
                             )
                         )
                     }
@@ -41,6 +39,6 @@ class ServiceManagementViewModel @Inject constructor(
 
     sealed class State {
         object Loading : State()
-        data class Content(val cardLastNumber: Int, val moneyFormatted: String) : State()
+        data class Content(val cardLastNumber: Int, val money: Float) : State()
     }
 }

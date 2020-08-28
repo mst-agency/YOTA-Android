@@ -2,7 +2,6 @@
     <string name="app_name">yota</string>
     <string name="balance">Баланс</string>
 
-    <string name="balance_formatted">%1$s ₽</string>
     <string name="card_number_formatted">* %1$d</string>
     <string name="money">Деньги</string>
 </resources>
