@@ -25,6 +25,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|start"
             android:gravity="center"
+            app:start_color="@color/gradient_title_start_color"
+            app:end_color="@color/gradient_title_end_color"
             android:text="@string/money"
             android:textAllCaps="true"
             android:textSize="15sp"
