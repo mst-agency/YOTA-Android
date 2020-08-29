@@ -21,46 +21,38 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <app.yota.view.GradientTextView
+            style="@style/Yota.Text.GradientTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|start"
             android:gravity="center"
-            app:start_color="@color/gradient_title_start_color"
-            app:end_color="@color/gradient_title_end_color"
             android:text="@string/money"
-            android:textAllCaps="true"
-            android:textSize="15sp"
-            app:fontFamily="?fontBold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/textView"
+            style="@style/Yota.Text.Title1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|start"
             android:gravity="center"
             android:text="@string/balance"
-            android:textColor="@color/balance_color"
-            android:textSize="15sp"
-            app:fontFamily="?fontNormal"
             app:layout_constraintBottom_toBottomOf="@+id/balance_value_text_view"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/balance_value_text_view" />
 
         <TextView
             android:id="@+id/balance_value_text_view"
+            style="@style/Yota.Text.Title2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="11dp"
             android:gravity="center"
-            tools:text="120,8 ₽"
-            android:textColor="@color/balance_color"
-            android:textSize="24sp"
-            app:fontFamily="?fontBold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/card_number_view" />
+            app:layout_constraintTop_toBottomOf="@+id/card_number_view"
+            tools:text="120,8 ₽" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -33,4 +33,32 @@
         <item name="cardCornerRadius">6dp</item>
     </style>
 
+    <style name="Yota"/>
+    <style name="Yota.Text"/>
+
+    <style name="Yota.Text.Title1">
+        <item name="android:textColor">@color/balance_color</item>
+        <item name="android:textSize">15sp</item>
+        <item name="fontFamily">?fontNormal</item>
+    </style>
+
+    <style name="Yota.Text.Title2">
+        <item name="android:textColor">@color/balance_color</item>
+        <item name="android:textSize">24sp</item>
+        <item name="fontFamily">?fontBold</item>
+    </style>
+
+    <style name="Yota.Text.Title3">
+        <item name="android:textColor">@color/card_number_text_color</item>
+        <item name="android:textSize">16sp</item>
+        <item name="fontFamily">?fontBold</item>
+    </style>
+
+    <style name="Yota.Text.GradientTitle">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="fontFamily">?fontBold</item>
+        <item name="end_color">@color/gradient_title_end_color</item>
+        <item name="start_color">@color/gradient_title_start_color</item>
+    </style>
 </resources>
