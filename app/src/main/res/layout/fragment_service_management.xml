@@ -24,6 +24,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
+            <app.yota.view.notifications.carousel.NotificationsCarouselView
+                android:id="@+id/notifications_carousel_view"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/notifications_carousel_height"
+                android:layout_marginTop="@dimen/notifications_carousel_vertical_margin"
+                android:layout_marginBottom="@dimen/notifications_carousel_vertical_margin" />
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1000dp" />
@@ -43,8 +50,8 @@
 
     <ProgressBar
         android:id="@+id/loading_progress_bar"
-        android:layout_gravity="center"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_gravity="center" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

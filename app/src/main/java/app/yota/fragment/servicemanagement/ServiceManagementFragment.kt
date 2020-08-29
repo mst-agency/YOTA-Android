@@ -10,6 +10,7 @@ import app.yota.R
 import app.yota.di.scope.ViewModelInject
 import app.yota.fragment.BaseFragment
 import app.yota.view.MoneyCardView
+import app.yota.view.notifications.carousel.NotificationsCarouselView
 import app.yota.view.appbar.MoneyAppBarView
 import app.yota.view.showIfOrInvisible
 import javax.inject.Inject
@@ -23,6 +24,7 @@ class ServiceManagementFragment : BaseFragment() {
     private lateinit var moneyAppBarView: MoneyAppBarView
     private lateinit var moneyCardView: MoneyCardView
     private lateinit var loadingProgressBar: ProgressBar
+    private lateinit var notificationsCarouselView: NotificationsCarouselView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,10 +33,16 @@ class ServiceManagementFragment : BaseFragment() {
                 moneyAppBarView.showIfOrInvisible { state is ServiceManagementViewModel.State.Content }
                 moneyCardView.showIfOrInvisible { state is ServiceManagementViewModel.State.Content }
                 loadingProgressBar.showIfOrInvisible { state is ServiceManagementViewModel.State.Loading }
+            })
+            viewModel.accountLiveData.observe(lifecycleOwner, Observer { accountData ->
+                moneyAppBarView.setBalance(accountData.money)
+                moneyCardView.setBalance(accountData.money)
 
-                if (state is ServiceManagementViewModel.State.Content) {
-                    handleContentState(state)
-                }
+                moneyCardView.setCardNumber(accountData.cardLastNumber)
+                moneyAppBarView.setCardNumber(accountData.cardLastNumber)
+            })
+            viewModel.notificationsLiveData.observe(lifecycleOwner, Observer { notifications ->
+                notificationsCarouselView.setData(notifications)
             })
         })
     }
@@ -52,20 +60,13 @@ class ServiceManagementFragment : BaseFragment() {
         moneyAppBarView = view.findViewById(R.id.appbar)
         moneyCardView = view.findViewById(R.id.money_card_view)
         loadingProgressBar = view.findViewById(R.id.loading_progress_bar)
+        notificationsCarouselView = view.findViewById(R.id.notifications_carousel_view)
 
         val cardNumberClickListener = View.OnClickListener {
             viewModel.onCardNumberClick()
         }
         moneyAppBarView.setOnCardNumberCLickListener(cardNumberClickListener)
         moneyCardView.setOnCardNumberCLickListener(cardNumberClickListener)
-    }
-
-    private fun handleContentState(content: ServiceManagementViewModel.State.Content) {
-        moneyAppBarView.setBalance(content.money)
-        moneyCardView.setBalance(content.money)
-
-        moneyCardView.setCardNumber(content.cardLastNumber)
-        moneyAppBarView.setCardNumber(content.cardLastNumber)
     }
 
     companion object {

@@ -4,5 +4,9 @@
     <dimen name="money_app_bar_height">70dp</dimen>
     <dimen name="card_number_view_height">28dp</dimen>
     <dimen name="card_nimber_corner_radius">14dp</dimen>
+    <dimen name="notifications_carousel_horizontal_padding">4dp</dimen>
+    <dimen name="notifications_carousel_vertical_margin">12dp</dimen>
+    <dimen name="notifications_carousel_height">125dp</dimen>
+    <dimen name="notifications_carousel_item_corner_radius">10dp</dimen>
 
 </resources>

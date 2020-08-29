@@ -5,6 +5,7 @@ import app.yota.BaseViewModel
 import app.yota.di.Schedulers
 import app.yota.domain.repository.IAccountRepository
 import app.yota.fragment.IServiceManagementScreenRouter
+import app.yota.view.notifications.carousel.CarouselViewHolderModel
 import javax.inject.Inject
 
 class ServiceManagementViewModel @Inject constructor(
@@ -15,8 +16,17 @@ class ServiceManagementViewModel @Inject constructor(
 
     private val _stateLiveData = MutableLiveData<State>()
 
+    private val _accountLiveData = MutableLiveData<AccountData>()
+    private val _notificationLiveData = MutableLiveData<List<CarouselViewHolderModel>>()
+
     val stateLiveData
         get() = _stateLiveData
+
+    val accountLiveData
+        get() = _accountLiveData
+
+    val notificationsLiveData
+        get() = _notificationLiveData
 
     init {
         subscribe {
@@ -28,10 +38,17 @@ class ServiceManagementViewModel @Inject constructor(
                 }
                 .subscribe { data, _ ->
                     if (data != null) {
-                        _stateLiveData.postValue(
-                            State.Content(
+                        _stateLiveData.postValue(State.Content)
+                        _accountLiveData.postValue(
+                            AccountData(
                                 data.cardNumber.takeLast(4).toInt(),
                                 data.money
+                            )
+                        )
+                        _notificationLiveData.postValue(
+                            listOf(
+                                CarouselViewHolderModel(),
+                                CarouselViewHolderModel()
                             )
                         )
                     }
@@ -45,6 +62,8 @@ class ServiceManagementViewModel @Inject constructor(
 
     sealed class State {
         object Loading : State()
-        data class Content(val cardLastNumber: Int, val money: Float) : State()
+        object Content : State()
     }
+
+    data class AccountData(val cardLastNumber: Int, val money: Float)
 }
