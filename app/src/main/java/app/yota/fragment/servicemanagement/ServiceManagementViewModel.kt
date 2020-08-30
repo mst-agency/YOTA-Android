@@ -7,7 +7,6 @@ import app.yota.domain.entity.AccountData
 import app.yota.domain.entity.Notification
 import app.yota.domain.repository.IAccountRepository
 import app.yota.domain.repository.INotificationsRepository
-import app.yota.fragment.IServiceManagementScreenRouter
 import app.yota.view.notifications.carousel.ICarouselViewHolderModel
 import io.reactivex.functions.BiFunction
 import javax.inject.Inject

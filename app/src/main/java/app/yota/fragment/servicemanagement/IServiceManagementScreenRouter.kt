@@ -1,4 +1,4 @@
-package app.yota.fragment
+package app.yota.fragment.servicemanagement
 
 interface IServiceManagementScreenRouter {
     fun toCardManagement()
