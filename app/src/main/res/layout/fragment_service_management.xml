@@ -31,6 +31,12 @@
                 android:layout_marginTop="@dimen/notifications_carousel_vertical_margin"
                 android:layout_marginBottom="@dimen/notifications_carousel_vertical_margin" />
 
+            <app.yota.view.ServicesCardView
+                android:id="@+id/services_card_view"
+                style="@style/ServicesCardViewStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1000dp" />

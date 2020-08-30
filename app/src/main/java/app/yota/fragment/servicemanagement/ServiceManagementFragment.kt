@@ -10,6 +10,7 @@ import app.yota.R
 import app.yota.di.scope.ViewModelInject
 import app.yota.fragment.BaseFragment
 import app.yota.view.MoneyCardView
+import app.yota.view.ServicesCardView
 import app.yota.view.notifications.carousel.NotificationsCarouselView
 import app.yota.view.appbar.MoneyAppBarView
 import app.yota.view.notifications.carousel.CarouselViewHolder
@@ -26,13 +27,16 @@ class ServiceManagementFragment : BaseFragment(), CarouselViewHolder.Listener {
     private lateinit var moneyCardView: MoneyCardView
     private lateinit var loadingProgressBar: ProgressBar
     private lateinit var notificationsCarouselView: NotificationsCarouselView
+    private lateinit var servicesCardView: ServicesCardView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewLifecycleOwnerLiveData.observe(this, Observer { lifecycleOwner ->
             viewModel.stateLiveData.observe(lifecycleOwner, Observer { state ->
+                //TODO refactor
                 moneyAppBarView.showIfOrHide { state is ServiceManagementViewModel.State.Content }
                 moneyCardView.showIfOrHide { state is ServiceManagementViewModel.State.Content }
+                servicesCardView.showIfOrHide { state is ServiceManagementViewModel.State.Content }
                 loadingProgressBar.showIfOrHide { state is ServiceManagementViewModel.State.Loading }
             })
             viewModel.accountLiveData.observe(lifecycleOwner, Observer { accountData ->
@@ -62,6 +66,7 @@ class ServiceManagementFragment : BaseFragment(), CarouselViewHolder.Listener {
         moneyCardView = view.findViewById(R.id.money_card_view)
         loadingProgressBar = view.findViewById(R.id.loading_progress_bar)
         notificationsCarouselView = view.findViewById(R.id.notifications_carousel_view)
+        servicesCardView = view.findViewById(R.id.services_card_view)
 
         val cardNumberClickListener = View.OnClickListener {
             viewModel.onCardNumberClick()

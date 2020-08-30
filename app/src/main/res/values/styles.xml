@@ -27,10 +27,16 @@
     </style>
 
     <style name="MoneyCardViewStyle">
-        <item name="android:layout_marginStart">12dp</item>
+        <item name="android:layout_marginStart">@dimen/services_management_container_horizontal_margin</item>
         <item name="android:layout_marginTop">15dp</item>
-        <item name="android:layout_marginEnd">12dp</item>
-        <item name="cardCornerRadius">6dp</item>
+        <item name="android:layout_marginEnd">@dimen/services_management_container_horizontal_margin</item>
+        <item name="cardCornerRadius">@dimen/services_management_card_corner_radius</item>
+    </style>
+
+    <style name="ServicesCardViewStyle">
+        <item name="android:layout_marginStart">@dimen/services_management_container_horizontal_margin</item>
+        <item name="android:layout_marginEnd">@dimen/services_management_container_horizontal_margin</item>
+        <item name="cardCornerRadius">@dimen/services_management_card_corner_radius</item>
     </style>
 
     <style name="Yota"/>
