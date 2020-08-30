@@ -44,9 +44,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:text="@string/balance_description"
-            app:layout_constraintBottom_toBottomOf="@+id/balance_value_text_view"
+            app:layout_constraintBottom_toBottomOf="@id/balance_value_text_view"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/balance_value_text_view" />
+            app:layout_constraintTop_toTopOf="@id/balance_value_text_view" />
 
         <TextView
             android:id="@+id/balance_value_text_view"
@@ -61,7 +61,7 @@
             android:paddingEnd="@dimen/phone_number_horizontal_padding"
             android:paddingBottom="@dimen/phone_number_vertical_padding"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/phone_number_text_view"
+            app:layout_constraintTop_toBottomOf="@id/phone_number_text_view"
             tools:text="450 ₽" />
 
         <View
@@ -73,7 +73,7 @@
             android:background="#E8F1FA"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/balance_value_text_view" />
+            app:layout_constraintTop_toBottomOf="@id/balance_value_text_view" />
 
         <TextView
             android:id="@+id/textView6"
@@ -84,7 +84,7 @@
             android:layout_marginTop="5dp"
             android:text="@string/services_apps_title"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view" />
+            app:layout_constraintTop_toBottomOf="@id/view" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
