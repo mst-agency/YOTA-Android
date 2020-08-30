@@ -8,5 +8,7 @@
     <dimen name="notifications_carousel_vertical_margin">12dp</dimen>
     <dimen name="notifications_carousel_height">125dp</dimen>
     <dimen name="notifications_carousel_item_corner_radius">10dp</dimen>
+    <dimen name="notification_action_button_horizontal_margin">64dp</dimen>
+    <dimen name="notification_text_horizontal_margin">28dp</dimen>
 
 </resources>

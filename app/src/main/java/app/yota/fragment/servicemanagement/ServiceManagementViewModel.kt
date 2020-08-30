@@ -3,21 +3,26 @@ package app.yota.fragment.servicemanagement
 import androidx.lifecycle.MutableLiveData
 import app.yota.BaseViewModel
 import app.yota.di.Schedulers
+import app.yota.domain.entity.AccountData
+import app.yota.domain.entity.Notification
 import app.yota.domain.repository.IAccountRepository
+import app.yota.domain.repository.INotificationsRepository
 import app.yota.fragment.IServiceManagementScreenRouter
-import app.yota.view.notifications.carousel.CarouselViewHolderModel
+import app.yota.view.notifications.carousel.ICarouselViewHolderModel
+import io.reactivex.functions.BiFunction
 import javax.inject.Inject
 
 class ServiceManagementViewModel @Inject constructor(
     private val router: IServiceManagementScreenRouter,
     private val schedulers: Schedulers,
-    private val accountRepository: IAccountRepository
+    private val accountRepository: IAccountRepository,
+    private val notificationsRepository: INotificationsRepository
 ) : BaseViewModel() {
 
     private val _stateLiveData = MutableLiveData<State>()
 
-    private val _accountLiveData = MutableLiveData<AccountData>()
-    private val _notificationLiveData = MutableLiveData<List<CarouselViewHolderModel>>()
+    private val _accountLiveData = MutableLiveData<AccountModel>()
+    private val _notificationLiveData = MutableLiveData<MutableList<CarouselViewHolderModel>>()
 
     val stateLiveData
         get() = _stateLiveData
@@ -31,28 +36,53 @@ class ServiceManagementViewModel @Inject constructor(
     init {
         subscribe {
             accountRepository.getAccountData()
+                .zipWith<List<Notification>, Pair<AccountData, List<Notification>>>(
+                    notificationsRepository.getNotifications(),
+                    BiFunction { t1, t2 ->
+                        t1 to t2
+                    })
                 .observeOn(schedulers.ui)
                 .subscribeOn(schedulers.io)
                 .doOnSubscribe {
                     _stateLiveData.postValue(State.Loading)
                 }
-                .subscribe { data, _ ->
-                    if (data != null) {
+                .subscribe { (accountData, notifications), error ->
+                    //TODO handle error
+                    if (error == null) {
                         _stateLiveData.postValue(State.Content)
                         _accountLiveData.postValue(
-                            AccountData(
-                                data.cardNumber.takeLast(4).toInt(),
-                                data.money
+                            AccountModel(
+                                accountData.cardNumber.takeLast(4).toInt(),
+                                accountData.money
                             )
                         )
                         _notificationLiveData.postValue(
-                            listOf(
-                                CarouselViewHolderModel(),
-                                CarouselViewHolderModel()
-                            )
+                            notifications.sortedBy { it.priority }.map {
+                                CarouselViewHolderModel(
+                                    id = it.id,
+                                    closable = it.closable,
+                                    text = it.text,
+                                    actionButtonText = it.button?.text,
+                                    rawNotification = it
+                                )
+                            }.toMutableList()
                         )
                     }
                 }
+        }
+    }
+
+    fun onNotificationActionButtonClick(id: Long) {
+        val notification = _notificationLiveData.value?.first { it.id == id }
+        notification?.rawNotification?.button?.deeplink?.let { deeplink ->
+            router.toDeeplink(deeplink)
+        }
+    }
+
+    fun onNotificationCloseButtonClick(id: Long) {
+        val notification = _notificationLiveData.value?.first { it.id == id }
+        _notificationLiveData.value?.remove(notification)?.let {
+            _notificationLiveData.postValue(_notificationLiveData.value)
         }
     }
 
@@ -65,5 +95,13 @@ class ServiceManagementViewModel @Inject constructor(
         object Content : State()
     }
 
-    data class AccountData(val cardLastNumber: Int, val money: Float)
+    data class AccountModel(val cardLastNumber: Int, val money: Float)
+
+    class CarouselViewHolderModel(
+        override val id: Long,
+        override val closable: Boolean,
+        override val text: String,
+        override val actionButtonText: String?,
+        val rawNotification: Notification
+    ) : ICarouselViewHolderModel
 }

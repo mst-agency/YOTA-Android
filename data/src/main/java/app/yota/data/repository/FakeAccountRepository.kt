@@ -1,4 +1,4 @@
-package app.yota.data
+package app.yota.data.repository
 
 import app.yota.domain.entity.AccountData
 import app.yota.domain.repository.IAccountRepository

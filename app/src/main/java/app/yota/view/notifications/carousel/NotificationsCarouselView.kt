@@ -13,18 +13,20 @@ import app.yota.utils.recyclerview.PagerMarginItemDecoration
 
 class NotificationsCarouselView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
-) : FrameLayout(context, attrs, defStyleAttr) {
+) : FrameLayout(context, attrs, defStyleAttr), CarouselViewHolder.Listener {
 
     private val recyclerView: RecyclerView
     private val recyclerLayoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
     private val snapHelper: SnapHelper
     private val recyclerAdapter: CarouselAdapter
 
+    private var targetCarouselListener: CarouselViewHolder.Listener? = null
+
     init {
         View.inflate(context, R.layout.layout_notifications_carousel_view, this)
         recyclerView = findViewById(R.id.recycler_view)
 
-        recyclerAdapter = CarouselAdapter()
+        recyclerAdapter = CarouselAdapter(this)
 
         recyclerView.apply {
             layoutManager = recyclerLayoutManager
@@ -39,7 +41,11 @@ class NotificationsCarouselView @JvmOverloads constructor(
         }
     }
 
-    fun setData(newData: List<CarouselViewHolderModel>) {
+    fun setCarouselListener(listener: CarouselViewHolder.Listener?) {
+        targetCarouselListener = listener
+    }
+
+    fun setData(newData: List<ICarouselViewHolderModel>) {
         recyclerAdapter.setData(newData)
         val calculatePosition = recyclerAdapter.calculatePosition()
 
@@ -64,4 +70,16 @@ class NotificationsCarouselView @JvmOverloads constructor(
 
     private val currentPosition
         get() = recyclerLayoutManager.findFirstCompletelyVisibleItemPosition()
+
+    // region CarouselViewHolder.Listener
+
+    override fun onNotificationActionButtonClick(id: Long) {
+        targetCarouselListener?.onNotificationActionButtonClick(id)
+    }
+
+    override fun onNotificationCloseButtonClick(id: Long) {
+        targetCarouselListener?.onNotificationCloseButtonClick(id)
+    }
+
+    // endregion CarouselViewHolder.Listener
 }

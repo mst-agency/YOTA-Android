@@ -1,9 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:cardBackgroundColor="@color/colorPrimaryDark"
-    app:cardCornerRadius="@dimen/notifications_carousel_item_corner_radius">
+    app:cardCornerRadius="@dimen/notifications_carousel_item_corner_radius"
+    tools:layout_height="125dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/text_view"
+            style="@style/Yota.Text.Title1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/notification_text_horizontal_margin"
+            android:layout_marginTop="7dp"
+            android:layout_marginEnd="@dimen/notification_text_horizontal_margin"
+            android:layout_marginBottom="8dp"
+            android:gravity="center"
+            android:text="Средства на счёте мтс есть, но пишут что недостаточно средств при покупке в игре через оператора. Подробности. Игры, Android"
+            android:textColor="#FFFFFF"
+            app:layout_constraintBottom_toTopOf="@id/action_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/action_button"
+            style="@style/Yota.Button.Notification"
+            android:layout_width="0dp"
+            android:layout_height="28dp"
+            android:layout_marginStart="@dimen/notification_action_button_horizontal_margin"
+            android:layout_marginEnd="@dimen/notification_action_button_horizontal_margin"
+            android:layout_marginBottom="12dp"
+            android:text="Пополнитьсчет"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageView
+            android:id="@+id/close_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="?selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_baseline_close_24"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.cardview.widget.CardView>

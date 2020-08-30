@@ -12,10 +12,11 @@ import app.yota.fragment.BaseFragment
 import app.yota.view.MoneyCardView
 import app.yota.view.notifications.carousel.NotificationsCarouselView
 import app.yota.view.appbar.MoneyAppBarView
-import app.yota.view.showIfOrInvisible
+import app.yota.view.notifications.carousel.CarouselViewHolder
+import app.yota.view.showIfOrHide
 import javax.inject.Inject
 
-class ServiceManagementFragment : BaseFragment() {
+class ServiceManagementFragment : BaseFragment(), CarouselViewHolder.Listener {
 
     @Inject
     @ViewModelInject
@@ -30,9 +31,9 @@ class ServiceManagementFragment : BaseFragment() {
         super.onCreate(savedInstanceState)
         viewLifecycleOwnerLiveData.observe(this, Observer { lifecycleOwner ->
             viewModel.stateLiveData.observe(lifecycleOwner, Observer { state ->
-                moneyAppBarView.showIfOrInvisible { state is ServiceManagementViewModel.State.Content }
-                moneyCardView.showIfOrInvisible { state is ServiceManagementViewModel.State.Content }
-                loadingProgressBar.showIfOrInvisible { state is ServiceManagementViewModel.State.Loading }
+                moneyAppBarView.showIfOrHide { state is ServiceManagementViewModel.State.Content }
+                moneyCardView.showIfOrHide { state is ServiceManagementViewModel.State.Content }
+                loadingProgressBar.showIfOrHide { state is ServiceManagementViewModel.State.Loading }
             })
             viewModel.accountLiveData.observe(lifecycleOwner, Observer { accountData ->
                 moneyAppBarView.setBalance(accountData.money)
@@ -67,7 +68,21 @@ class ServiceManagementFragment : BaseFragment() {
         }
         moneyAppBarView.setOnCardNumberCLickListener(cardNumberClickListener)
         moneyCardView.setOnCardNumberCLickListener(cardNumberClickListener)
+
+        notificationsCarouselView.setCarouselListener(this)
     }
+
+    // region CarouselViewHolder.Listener
+
+    override fun onNotificationActionButtonClick(id: Long) {
+        viewModel.onNotificationActionButtonClick(id)
+    }
+
+    override fun onNotificationCloseButtonClick(id: Long) {
+        viewModel.onNotificationCloseButtonClick(id)
+    }
+
+    // endregion CarouselViewHolder.Listener
 
     companion object {
         fun newInstance() = ServiceManagementFragment()

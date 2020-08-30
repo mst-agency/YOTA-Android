@@ -28,6 +28,10 @@ class ServiceManagementScreenModule {
             override fun toCardManagement() {
                 Toast.makeText(context, "router to CardManagement", Toast.LENGTH_SHORT).show()
             }
+
+            override fun toDeeplink(deeplink: String) {
+                Toast.makeText(context, "router to deeplink: $deeplink", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 }
