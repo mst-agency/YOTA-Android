@@ -67,6 +67,7 @@ class ServiceManagementFragment : BaseFragment(), CarouselViewHolder.Listener {
         loadingProgressBar = view.findViewById(R.id.loading_progress_bar)
         notificationsCarouselView = view.findViewById(R.id.notifications_carousel_view)
         servicesCardView = view.findViewById(R.id.services_card_view)
+        servicesCardView.attachToLifecycle(lifecycle)
 
         val cardNumberClickListener = View.OnClickListener {
             viewModel.onCardNumberClick()

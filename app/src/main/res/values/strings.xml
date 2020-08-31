@@ -3,6 +3,7 @@
     <string name="balance">Баланс</string>
 
     <string name="card_number_formatted">* %1$d</string>
+    <string name="value_progress_current_formatted">из %1$d</string>
     <string name="money">Деньги</string>
     <string name="balance_description">Общая сумма на 30 дней</string>
     <string name="mobile_connection">Связь</string>

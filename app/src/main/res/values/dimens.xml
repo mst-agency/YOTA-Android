@@ -17,4 +17,6 @@
     <dimen name="services_management_container_horizontal_margin">12dp</dimen>
     <dimen name="services_management_card_corner_radius">6dp</dimen>
 
+    <dimen name="gradient_progress_outer_border">3dp</dimen>
+    <dimen name="value_progress_view_size">64dp</dimen>
 </resources>

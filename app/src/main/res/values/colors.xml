@@ -8,6 +8,22 @@
     <color name="card_number_background_color_expanded">#f4f6f9</color>
     <color name="balance_color">#434C5D</color>
 
-    <color name="gradient_title_start_color">#10aeee</color>
-    <color name="gradient_title_end_color">#538bfa</color>
+    <color name="gradient_title_start_color">@color/default_gradient_start_color</color>
+    <color name="gradient_title_end_color">@color/default_gradient_end_color</color>
+
+    <color name="default_gradient_start_color">#10aeee</color>
+    <color name="default_gradient_end_color">#538bfa</color>
+
+    <color name="value_progress_background_stoke_color">#e8f1fa</color>
+
+    <array name="progress_gradient">
+        <item>@color/default_gradient_end_color</item>
+        <item>@color/default_gradient_start_color</item>
+        <item>@color/default_gradient_end_color</item>
+    </array>
+
+    <array name="progress_rotation_colors">
+        <item>@android:color/transparent</item>
+        <item>@android:color/white</item>
+    </array>
 </resources>

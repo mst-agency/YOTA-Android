@@ -61,6 +61,12 @@
         <item name="fontFamily">?fontBold</item>
     </style>
 
+    <style name="Yota.Text.Title4">
+        <item name="android:textColor">#b3b7c0</item>
+        <item name="android:textSize">10sp</item>
+        <item name="fontFamily">?fontBold</item>
+    </style>
+
     <style name="Yota.Text.GradientTitle">
         <item name="android:textSize">15sp</item>
         <item name="android:textAllCaps">true</item>
