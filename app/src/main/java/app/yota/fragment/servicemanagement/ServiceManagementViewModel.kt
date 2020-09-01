@@ -8,7 +8,9 @@ import app.yota.domain.entity.Notification
 import app.yota.domain.repository.IAccountRepository
 import app.yota.domain.repository.INotificationsRepository
 import app.yota.view.notifications.carousel.ICarouselViewHolderModel
+import io.reactivex.Observable
 import io.reactivex.functions.BiFunction
+import io.reactivex.subjects.PublishSubject
 import javax.inject.Inject
 
 class ServiceManagementViewModel @Inject constructor(
@@ -17,6 +19,8 @@ class ServiceManagementViewModel @Inject constructor(
     private val accountRepository: IAccountRepository,
     private val notificationsRepository: INotificationsRepository
 ) : BaseViewModel() {
+
+    private val reloadDataSubject = PublishSubject.create<Unit>()
 
     private val _stateLiveData = MutableLiveData<State>()
 
@@ -34,42 +38,49 @@ class ServiceManagementViewModel @Inject constructor(
 
     init {
         subscribe {
-            accountRepository.getAccountData()
-                .zipWith<List<Notification>, Pair<AccountData, List<Notification>>>(
-                    notificationsRepository.getNotifications(),
-                    BiFunction { t1, t2 ->
-                        t1 to t2
-                    })
+            reloadDataSubject
+                .startWith(Unit)
+                .observeOn(schedulers.io)
+                .switchMap {
+                    accountRepository.getAccountData()
+                        .zipWith<List<Notification>, Pair<AccountData, List<Notification>>>(
+                            notificationsRepository.getNotifications(),
+                            BiFunction { t1, t2 ->
+                                t1 to t2
+                            })
+                        .doOnSubscribe { stateLiveData.postValue(State.Loading) }
+                        .doOnError {
+                            stateLiveData.postValue(State.Error)
+                        }
+                        .toObservable()
+                        .onErrorResumeNext(Observable.empty())
+                }
                 .observeOn(schedulers.ui)
                 .subscribeOn(schedulers.io)
-                .doOnSubscribe {
-                    _stateLiveData.postValue(State.Loading)
-                }
-                .subscribe { (accountData, notifications), error ->
-                    //TODO handle error
-                    if (error == null) {
-                        _stateLiveData.postValue(State.Content)
-                        _accountLiveData.postValue(
-                            AccountModel(
-                                accountData.cardNumber.takeLast(4).toInt(),
-                                accountData.money
+                .subscribe { (accountData, notifications) ->
+                    _stateLiveData.postValue(State.Content)
+                    _accountLiveData.postValue(
+                        AccountModel(
+                            accountData.cardNumber.takeLast(4).toInt(),
+                            accountData.money
+                        )
+                    )
+                    _notificationLiveData.postValue(
+                        notifications.sortedBy { it.priority }.map {
+                            CarouselViewHolderModel(
+                                id = it.id,
+                                closable = it.closable,
+                                text = it.text,
+                                actionButtonText = it.button?.text,
+                                rawNotification = it
                             )
-                        )
-                        _notificationLiveData.postValue(
-                            notifications.sortedBy { it.priority }.map {
-                                CarouselViewHolderModel(
-                                    id = it.id,
-                                    closable = it.closable,
-                                    text = it.text,
-                                    actionButtonText = it.button?.text,
-                                    rawNotification = it
-                                )
-                            }.toMutableList()
-                        )
-                    }
+                        }.toMutableList()
+                    )
                 }
         }
     }
+
+    fun onRetryClick() = reloadDataSubject.onNext(Unit)
 
     fun onNotificationActionButtonClick(id: Long) {
         val notification = _notificationLiveData.value?.first { it.id == id }
@@ -92,6 +103,7 @@ class ServiceManagementViewModel @Inject constructor(
     sealed class State {
         object Loading : State()
         object Content : State()
+        object Error : State()
     }
 
     data class AccountModel(val cardLastNumber: Int, val money: Float)

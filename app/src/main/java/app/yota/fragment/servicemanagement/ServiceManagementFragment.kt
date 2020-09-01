@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ProgressBar
 import androidx.lifecycle.Observer
 import app.yota.R
@@ -28,6 +29,8 @@ class ServiceManagementFragment : BaseFragment(), CarouselViewHolder.Listener {
     private lateinit var loadingProgressBar: ProgressBar
     private lateinit var notificationsCarouselView: NotificationsCarouselView
     private lateinit var servicesCardView: ServicesCardView
+    private lateinit var repeatButton: Button
+    private lateinit var errorStateGroupView: View
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,6 +41,7 @@ class ServiceManagementFragment : BaseFragment(), CarouselViewHolder.Listener {
                 moneyCardView.showIfOrHide { state is ServiceManagementViewModel.State.Content }
                 servicesCardView.showIfOrHide { state is ServiceManagementViewModel.State.Content }
                 loadingProgressBar.showIfOrHide { state is ServiceManagementViewModel.State.Loading }
+                errorStateGroupView.showIfOrHide { state is ServiceManagementViewModel.State.Error }
             })
             viewModel.accountLiveData.observe(lifecycleOwner, Observer { accountData ->
                 moneyAppBarView.setBalance(accountData.money)
@@ -67,6 +71,12 @@ class ServiceManagementFragment : BaseFragment(), CarouselViewHolder.Listener {
         loadingProgressBar = view.findViewById(R.id.loading_progress_bar)
         notificationsCarouselView = view.findViewById(R.id.notifications_carousel_view)
         servicesCardView = view.findViewById(R.id.services_card_view)
+        errorStateGroupView = view.findViewById(R.id.error_state_group)
+        repeatButton = view.findViewById<Button>(R.id.repeat_button).apply {
+            setOnClickListener {
+                viewModel.onRetryClick()
+            }
+        }
         servicesCardView.attachToLifecycle(lifecycle)
 
         val cardNumberClickListener = View.OnClickListener {

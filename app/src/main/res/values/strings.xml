@@ -8,4 +8,6 @@
     <string name="balance_description">Общая сумма на 30 дней</string>
     <string name="mobile_connection">Связь</string>
     <string name="services_apps_title">Безлимитные мобильные приложения</string>
+    <string name="error_1">Произошла ошибка</string>
+    <string name="repeat">Повторить</string>
 </resources>
