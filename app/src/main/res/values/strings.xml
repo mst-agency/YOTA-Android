@@ -10,4 +10,7 @@
     <string name="services_apps_title">Безлимитные мобильные приложения</string>
     <string name="error_1">Произошла ошибка</string>
     <string name="repeat">Повторить</string>
+    <string name="minutes_left">Осталось минут</string>
+    <string name="gigabytes_left">Осталось гагайбайт</string>
+    <string name="next_payment">Следующее списание %1$s</string>
 </resources>

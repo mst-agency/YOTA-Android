@@ -32,8 +32,8 @@ class ValueProgressView @JvmOverloads constructor(
     }
 
     fun setProgress(total: Int, current: Int) {
-        totalTextView.text = total.toString()
-        currentView.text = context.getString(R.string.value_progress_current_formatted, current)
+        totalTextView.text = current.toString()
+        currentView.text = context.getString(R.string.value_progress_current_formatted, total)
 
         val valueProgressDrawable = background
         if (valueProgressDrawable is ValueProgressDrawable) {

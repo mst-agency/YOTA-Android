@@ -53,6 +53,17 @@ class ServiceManagementFragment : BaseFragment(), CarouselViewHolder.Listener {
             viewModel.notificationsLiveData.observe(lifecycleOwner, Observer { notifications ->
                 notificationsCarouselView.setData(notifications)
             })
+            viewModel.profileLiveData.observe(lifecycleOwner, Observer { profile ->
+                profile.gigabytesAccumulator.let { accumulator ->
+                    servicesCardView.setGigabytesAccumulatorDate(accumulator.total, accumulator.current)
+                }
+                profile.minutesAccumulator.let { accumulator ->
+                    servicesCardView.setMinutesAccumulatorDate(accumulator.total, accumulator.current)
+                }
+                servicesCardView.setTotalAmount(profile.totalAmount)
+                servicesCardView.setPhoneNumber(profile.phoneNumber)
+                servicesCardView.setNextPaymentDate(profile.nextPaymentDate)
+            })
         })
     }
 

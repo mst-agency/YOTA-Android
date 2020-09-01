@@ -14,17 +14,15 @@ class FaceNotificationsRepository : INotificationsRepository {
         "Настройки → Сотовая связь → Сотовая сеть передачи данных → Режим модема. Вписать значение «internet.yota». После этого через несколько секунд, режим модема станет доступен в настройках устройства."
     )
 
-    override fun getNotifications(): Single<List<Notification>> {
-        return Single.just(List(10) { index ->
-            Notification(
-                index.toLong(),
-                Random.nextInt(1, 101),
-                Random.nextInt(1, 4) == 1,
-                texts[Random.nextInt(0, texts.size)],
-                Random.nextInt(1, 4).takeIf { it != 1 }?.let {
-                    Notification.Button("Пополнить счет на 450 ₽", "yota//:payment")
-                }
-            )
-        })
-    }
+    override fun getNotifications(): Single<List<Notification>> = Single.just(List(10) { index ->
+        Notification(
+            index.toLong(),
+            Random.nextInt(1, 101),
+            Random.nextInt(1, 4) == 1,
+            texts[Random.nextInt(0, texts.size)],
+            Random.nextInt(1, 4).takeIf { it != 1 }?.let {
+                Notification.Button("Пополнить счет на 450 ₽", "yota//:payment")
+            }
+        )
+    })
 }

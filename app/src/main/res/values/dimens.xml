@@ -19,4 +19,6 @@
 
     <dimen name="gradient_progress_outer_border">3dp</dimen>
     <dimen name="value_progress_view_size">64dp</dimen>
+    <dimen name="social_icon_size">15dp</dimen>
+    <dimen name="social_icon_start_margin">8dp</dimen>
 </resources>

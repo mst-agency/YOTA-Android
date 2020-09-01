@@ -4,9 +4,11 @@ import android.app.Application
 import android.content.Context
 import app.yota.data.repository.FakeAccountRepository
 import app.yota.data.repository.FaceNotificationsRepository
+import app.yota.data.repository.FakeProfileRepository
 import app.yota.di.scope.PerApplication
 import app.yota.domain.repository.IAccountRepository
 import app.yota.domain.repository.INotificationsRepository
+import app.yota.domain.repository.IProfileRepository
 import dagger.Module
 import dagger.Provides
 
@@ -24,6 +26,11 @@ class AppModule(private val app: Application) {
     @Provides
     fun provideNotificationsRepository(): INotificationsRepository {
         return FaceNotificationsRepository()
+    }
+
+    @Provides
+    fun provideProfileRepository(): IProfileRepository {
+        return FakeProfileRepository()
     }
 
     @Module
