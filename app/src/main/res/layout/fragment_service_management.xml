@@ -13,35 +13,48 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:clipChildren="false"
+            android:layout_height="match_parent">
 
             <app.yota.view.MoneyCardView
                 android:id="@+id/money_card_view"
                 style="@style/MoneyCardViewStyle"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <app.yota.view.notifications.carousel.NotificationsCarouselView
                 android:id="@+id/notifications_carousel_view"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/notifications_carousel_height"
                 android:layout_marginTop="@dimen/notifications_carousel_vertical_margin"
-                android:layout_marginBottom="@dimen/notifications_carousel_vertical_margin" />
+                android:layout_marginBottom="@dimen/notifications_carousel_vertical_margin"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/money_card_view" />
 
             <app.yota.view.ServicesCardView
                 android:id="@+id/services_card_view"
                 style="@style/ServicesCardViewStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/notifications_carousel_view" />
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1000dp" />
+                android:layout_height="1000dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 
     <app.yota.view.appbar.MoneyAppBarView
@@ -63,9 +76,9 @@
     <LinearLayout
         android:id="@+id/error_state_group"
         android:layout_width="wrap_content"
-        android:orientation="vertical"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_height="wrap_content">
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/phone_number_text_view"
@@ -80,9 +93,9 @@
             android:id="@+id/repeat_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/repeat"
             android:layout_gravity="center"
             android:elevation="0dp"
+            android:text="@string/repeat"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

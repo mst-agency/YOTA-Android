@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.View
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.view.ViewCompat
+import kotlinx.android.parcel.Parcelize
 
 class MoneyAppbarBehavior(private val expandedHeight: Int) :
     CoordinatorLayout.Behavior<MoneyAppBarView>() {
@@ -42,7 +43,7 @@ class MoneyAppbarBehavior(private val expandedHeight: Int) :
         parent: CoordinatorLayout,
         child: MoneyAppBarView
     ): Parcelable {
-        return SavedState(super.onSaveInstanceState(parent, child), this)
+        return SavedState(super.onSaveInstanceState(parent, child), scrollOffset)
     }
 
     override fun onRestoreInstanceState(
@@ -67,34 +68,11 @@ class MoneyAppbarBehavior(private val expandedHeight: Int) :
         child.requestLayout()
     }
 
-    private class SavedState : View.BaseSavedState {
-
+    @Parcelize
+    private class SavedState(
+        val parcelable: Parcelable?,
         val scrollOffset: Float
-
-        constructor(parcelable: Parcelable?, behavior: MoneyAppbarBehavior) : super(parcelable) {
-            scrollOffset = behavior.scrollOffset
-        }
-
-        constructor(parcel: Parcel) : super(parcel) {
-            scrollOffset = parcel.readFloat()
-        }
-
-        override fun writeToParcel(parcel: Parcel, flags: Int) {
-            super.writeToParcel(parcel, flags)
-            parcel.writeFloat(scrollOffset)
-        }
-
-        companion object CREATOR : Parcelable.Creator<SavedState> {
-
-            override fun createFromParcel(parcel: Parcel): SavedState {
-                return SavedState(parcel)
-            }
-
-            override fun newArray(size: Int): Array<SavedState?> {
-                return arrayOfNulls(size)
-            }
-        }
-    }
+    ) : View.BaseSavedState(parcelable)
 
     private fun Float.clamp(): Float {
         return when {

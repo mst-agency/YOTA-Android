@@ -13,4 +13,6 @@
     <string name="minutes_left">Осталось минут</string>
     <string name="gigabytes_left">Осталось гагайбайт</string>
     <string name="next_payment">Следующее списание %1$s</string>
+    <string name="collapse">Свернуть</string>
+    <string name="expand">Развернуть</string>
 </resources>

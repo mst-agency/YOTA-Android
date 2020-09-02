@@ -17,4 +17,7 @@
         <attr name="end_color" format="color" />
     </declare-styleable>
 
+    <declare-styleable name="ExpandableView">
+        <attr name="isExpanded" format="boolean" />
+    </declare-styleable>
 </resources>

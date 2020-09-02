@@ -21,4 +21,5 @@
     <dimen name="value_progress_view_size">64dp</dimen>
     <dimen name="social_icon_size">15dp</dimen>
     <dimen name="social_icon_start_margin">8dp</dimen>
+    <dimen name="expand_button_hosrizontal_margin">20dp</dimen>
 </resources>

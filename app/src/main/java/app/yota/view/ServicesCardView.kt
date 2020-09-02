@@ -1,10 +1,13 @@
 package app.yota.view
 
+import android.app.Activity
 import android.content.Context
 import android.telephony.PhoneNumberUtils
 import android.util.AttributeSet
+import android.view.View
 import android.widget.TextView
 import androidx.cardview.widget.CardView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.Lifecycle
 import app.yota.R
 import app.yota.utils.balanceColor
@@ -16,13 +19,15 @@ class ServicesCardView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
-) : CardView(context, attrs, defStyleAttr) {
+) : ConstraintLayout(context, attrs, defStyleAttr), ExpandableView.OnExpandListener {
 
     private val minutesValueProgressView: ValueProgressView
     private val gigabytesValueProgressView: ValueProgressView
     private val totalAmountValueTextView: TextView
     private val phoneNumberTextView: TextView
     private val nextPaymentTextView: TextView
+    private val expandButton: PressableButton
+    private val expandableView: ExpandableView
 
     init {
         inflate(context, R.layout.layout_services_card_view, this)
@@ -31,6 +36,18 @@ class ServicesCardView @JvmOverloads constructor(
         totalAmountValueTextView = findViewById(R.id.total_amount_value_text_view)
         phoneNumberTextView = findViewById(R.id.phone_number_text_view)
         nextPaymentTextView = findViewById(R.id.next_payment_text_view)
+        expandButton = findViewById(R.id.expand_button)
+        expandableView = findViewById(R.id.expandable_view)
+
+        expandableView.setOnExpandListener(this)
+        expandButton.setOnClickListener {
+            expandableView.toggle()
+        }
+    }
+
+    override fun onAttachedToWindow() {
+        super.onAttachedToWindow()
+        onExpand(expandableView.isExpanded)
     }
 
     fun attachToLifecycle(lifecycle: Lifecycle) {
@@ -58,7 +75,19 @@ class ServicesCardView @JvmOverloads constructor(
 
     fun setNextPaymentDate(date: String?) {
         nextPaymentTextView.showIfOrHide { date != null }?.let {
-            it.text =context.getString(R.string.next_payment, date)
+            it.text = context.getString(R.string.next_payment, date)
         }
+    }
+
+    override fun onExpand(isExpanded: Boolean) {
+        expandButton.setText(
+            context.getString(
+                if (isExpanded) {
+                    R.string.collapse
+                } else {
+                    R.string.expand
+                }
+            )
+        )
     }
 }
