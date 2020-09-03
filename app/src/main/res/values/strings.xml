@@ -11,8 +11,11 @@
     <string name="error_1">Произошла ошибка</string>
     <string name="repeat">Повторить</string>
     <string name="minutes_left">Осталось минут</string>
+    <string name="minutes">Минуты</string>
     <string name="gigabytes_left">Осталось гагайбайт</string>
+    <string name="gigabytes">Гагайбайты</string>
     <string name="next_payment">Следующее списание %1$s</string>
     <string name="collapse">Свернуть</string>
     <string name="expand">Развернуть</string>
+    <string name="submit">Подтвержить изменения</string>
 </resources>

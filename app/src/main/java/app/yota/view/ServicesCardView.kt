@@ -1,12 +1,10 @@
 package app.yota.view
 
-import android.app.Activity
 import android.content.Context
 import android.telephony.PhoneNumberUtils
 import android.util.AttributeSet
 import android.view.View
 import android.widget.TextView
-import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.Lifecycle
 import app.yota.R
@@ -28,6 +26,7 @@ class ServicesCardView @JvmOverloads constructor(
     private val nextPaymentTextView: TextView
     private val expandButton: PressableButton
     private val expandableView: ExpandableView
+    private val submitButton: View
 
     init {
         inflate(context, R.layout.layout_services_card_view, this)
@@ -38,6 +37,7 @@ class ServicesCardView @JvmOverloads constructor(
         nextPaymentTextView = findViewById(R.id.next_payment_text_view)
         expandButton = findViewById(R.id.expand_button)
         expandableView = findViewById(R.id.expandable_view)
+        submitButton = findViewById(R.id.submit_button)
 
         expandableView.setOnExpandListener(this)
         expandButton.setOnClickListener {
