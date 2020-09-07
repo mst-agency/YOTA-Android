@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ProgressBar
+import androidx.core.widget.NestedScrollView
 import androidx.lifecycle.Observer
 import app.yota.R
 import app.yota.di.scope.ViewModelInject
@@ -24,6 +25,7 @@ class ServiceManagementFragment : BaseFragment(), CarouselViewHolder.Listener {
     @ViewModelInject
     lateinit var viewModel: ServiceManagementViewModel
 
+    private lateinit var scrollView: NestedScrollView
     private lateinit var moneyAppBarView: MoneyAppBarView
     private lateinit var moneyCardView: MoneyCardView
     private lateinit var loadingProgressBar: ProgressBar
@@ -36,10 +38,8 @@ class ServiceManagementFragment : BaseFragment(), CarouselViewHolder.Listener {
         super.onCreate(savedInstanceState)
         viewLifecycleOwnerLiveData.observe(this, Observer { lifecycleOwner ->
             viewModel.stateLiveData.observe(lifecycleOwner, Observer { state ->
-                //TODO refactor
                 moneyAppBarView.showIfOrHide { state is ServiceManagementViewModel.State.Content }
-                moneyCardView.showIfOrHide { state is ServiceManagementViewModel.State.Content }
-                servicesCardView.showIfOrHide { state is ServiceManagementViewModel.State.Content }
+                scrollView.showIfOrHide { state is ServiceManagementViewModel.State.Content }
                 loadingProgressBar.showIfOrHide { state is ServiceManagementViewModel.State.Loading }
                 errorStateGroupView.showIfOrHide { state is ServiceManagementViewModel.State.Error }
             })
@@ -77,6 +77,7 @@ class ServiceManagementFragment : BaseFragment(), CarouselViewHolder.Listener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        scrollView = view.findViewById(R.id.scroll)
         moneyAppBarView = view.findViewById(R.id.appbar)
         moneyCardView = view.findViewById(R.id.money_card_view)
         loadingProgressBar = view.findViewById(R.id.loading_progress_bar)
